@@ -1,8 +1,15 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+# import main
 import asyncio
 import discord
+import json
 from discord.ext.commands import Bot
+
+# Définnition des variables
+BOT_VERSION = "herobrine"
+BOT_TOKEN = "NDI3Nzg0NjY1NjU1NDEwNjk5.DZplNg.3MYNRJ3LD0fh72sgbVdXkpXYDco"
 
 # Définnition du préfixe
 client = Bot('!')
@@ -40,7 +47,7 @@ async def sleep(ctx):
 async def hug(ctx):
     auteur = ctx.message.author.mention
     name = ctx.message.content[len('!hug'):].strip()
-    await client.send_message(ctx.message.channel, '{} reçois un câlin de {}'.format(name, auteur))
+    await client.send_message(ctx.message.channel, ':hugging: {} reçois un câlin de {} :heart:'.format(name, auteur))
 
 @client.command(pass_context = True)
 async def kick(ctx, userName: discord.User):
@@ -57,4 +64,4 @@ async def on_ready():
     print(client.user.id)
     print('En cours d\'éxecution.')
 
-client.run('NDI3Nzg0NjY1NjU1NDEwNjk5.DZplNg.3MYNRJ3LD0fh72sgbVdXkpXYDco')
+client.run(BOT_TOKEN)
