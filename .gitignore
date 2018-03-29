@@ -1,2 +1,5 @@
 # Ignorer tous les fichiers de logs
 *.log
+
+# Ignorer les fichiers de cache
+*__pycache__/
