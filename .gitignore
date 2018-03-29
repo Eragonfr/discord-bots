@@ -3,3 +3,6 @@
 
 # Ignorer les fichiers de cache
 *__pycache__/
+
+# Ignorer le fichier contenant le token est les variables
+infos.json
