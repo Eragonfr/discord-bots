@@ -9,7 +9,7 @@ from discord.ext.commands import Bot
 
 # Définnition des variables
 BOT_VERSION = "herobrine"
-BOT_TOKEN = "NDI3Nzg0NjY1NjU1NDEwNjk5.DZplNg.3MYNRJ3LD0fh72sgbVdXkpXYDco"
+BOT_TOKEN = "NDI4OTk4MjM0ODA4MjU0NDY0.DZ7PRw.yb8NX1Tha08nSHmzkWql07D_-5o"
 
 # Définnition du préfixe
 client = Bot('!')
@@ -50,11 +50,46 @@ async def hug(ctx):
     await client.send_message(ctx.message.channel, ':hugging: {} reçois un câlin de {} :heart:'.format(name, auteur))
 
 @client.command(pass_context = True)
+async def kiss(ctx):
+    auteur = ctx.message.author.mention
+    name = ctx.message.content[len('!kiss'):].strip()
+    await client.send_message(ctx.message.channel, ':heart: {} reçois un bisou de {} :heart:'.format(name, auteur))
+
+@client.command(pass_context = True)
+async def f(ctx):
+    await client.send_message(ctx.message.channel, '**FAUX!**')
+
+@client.command(pass_context = True)
+async def v(ctx):
+    await client.send_message(ctx.message.channel, '**Vrai!**')
+
+@client.command(pass_context = True)
+async def cpf(ctx):
+    await client.send_message(ctx.message.channel, 'C\'est pas faux!')
+
+@client.command(pass_context = True)
+async def love(ctx):
+    await client.send_message(ctx.message.channel, 'Je suis amoureux d\'Ahoki, mais *chuut* faut pas le dire.')
+
+@client.command(pass_context = True)
+async def castor(ctx):
+    await client.send_message(ctx.message.channel, 'GallaR quand il voit des castors , il porte des lunettes pour bien les voir')
+
+
+
+@client.command(pass_context = True)
 async def kick(ctx, userName: discord.User):
     auteur = ctx.message.author.mention
     name = ctx.message.content[len('!kick'):].strip()
     await client.kick(userName)
     await client.send_message(ctx.message.channel, '{} à été expulsé par {}'.format(name, auteur))
+
+@client.command(pass_context = True)
+async def unban(ctx, userName: discord.User):
+    auteur = ctx.message.author.mention
+    name = ctx.message.content[len('!unban'):].strip()
+    await client.unban(userName)
+    await client.send_message(ctx.message.channel, '{} à été débanni par {}'.format(name, auteur))
 
 # infos au démmarage
 @client.event
