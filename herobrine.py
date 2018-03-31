@@ -8,11 +8,10 @@ import json
 from discord.ext.commands import Bot
 
 # Définnition des variables
-BOT_VERSION = "herobrine"
 BOT_TOKEN = ""
 
 # Définnition du préfixe
-client = Bot('!')
+client = Bot('¿')
 
 
 # Définnition des commandes
@@ -85,7 +84,7 @@ async def kick(ctx, userName: discord.User):
 @client.command(pass_context = True)
 async def ban(ctx, userName: discord.User):
     auteur = ctx.message.author.mention
-    name = ctx.message.content[len('!unban'):].strip()
+    name = ctx.message.content[len('!ban'):].strip()
     file = "/home/samuel/Images/Gif/banhammer.gif"
     await client.ban(userName)
     await client.send_file(ctx.message.channel, file, filename=None, content='{} à été banni par {}'.format(name, auteur), tts=False)
@@ -118,12 +117,20 @@ après-midi, on est au mois de mai….\r**Quel est l\'âge du capitaine ?**',
     em.set_author(name='Herobrine', icon_url=client.user.avatar_url)
     await client.send_message(ctx.message.channel, embed=em)
 
+@client.command(pass_context = True)
+async def anniversaire(ctx, userName: discord.User):
+    em = discord.Embed(title='Bon anniversaire!', description='Joyeux anniversaire {}!'.format(userName.mention),
+    colour=0x005D0A)
+    em.set_image(url='https://orig00.deviantart.net/2336/f/2018/087/a/6/a6ee731989e9972328f62f7663f54b33-dc78dpp.png')
+    em.set_author(name='Herobrine', icon_url=client.user.avatar_url)
+    await client.send_message(ctx.message.channel, embed=em)
+
 # infos au démmarage
 @client.event
 async def on_ready():
     print('Connecté en tant que:')
     print(client.user.name)
     print(client.user.id)
-    print('En cours d\'éxecution.')
+    print('En cours d\'exécution.')
 
 client.run(BOT_TOKEN)
