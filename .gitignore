@@ -5,4 +5,4 @@
 *__pycache__/
 
 # Ignorer le fichier contenant le token est les variables
-infos.json
+config.json
