@@ -34,18 +34,16 @@ def load_config(bot):
 
 def logs(bot):
     """Chargement et écriture des logs."""
+
+    print('Chargement des logs')
+    logger = logging.getLogger('discord')
     if bot == 'dev':
-        logger = logging.getLogger('discord')
         logger.setLevel(logging.DEBUG)
-        handler = logging.FileHandler(filename='discord.dev.log', encoding='utf-8', mode='w')
-        handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
-        logger.addHandler(handler)
     else:
-        logger = logging.getLogger('discord')
         logger.setLevel(logging.INFO)
-        handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w')
-        handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
-        logger.addHandler(handler)
+    handler = logging.FileHandler(filename='discord.dev.log', encoding='utf-8', mode='w')
+    handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
+    logger.addHandler(handler)
 
 def load_commands(self, extra_commands):
     for commands_module, config in extra_commands.items():
@@ -57,10 +55,15 @@ def load_commands(self, extra_commands):
 
 @client.event
 async def on_ready():
-    print('Connecté en tant que:')
-    print(client.user.name)
-    print(client.user.id)
+    print('Connecté en tant qu\'{}'.format(client.user.name))
+    print('ID:{}'.format(client.user.id))
     print('En cours d\'éxecution.')
+
+def run(bot, config):
+    print(config['BOT_VERSION'])
+    logs(param1)
+    print('Connexion à Discord en cours...')
+    client.run(config['BOT_TOKEN'])
 
 
 # Code principal du bot, vérification des paramètres et chargement de la configuration
@@ -74,12 +77,10 @@ if len(sys.argv) > 3:
 
 if param1 == "dev":
     config = load_config(param1)
-    print(config['BOT_VERSION'])
-    client.run(config['BOT_TOKEN'])
+    run(param1, config)
 elif param1 == "prod":
     config = load_config(param1)
-    print(config['BOT_VERSION'])
-    client.run(config['BOT_TOKEN'])
+    run(param1, config)
 elif param1 == "help":
     help_bot()
     sys.exit(1)
