@@ -9,7 +9,7 @@ from discord.ext.commands import Bot
 
 # Définnition des variables
 BOT_VERSION = "herobrine"
-BOT_TOKEN = "NDI4OTk4MjM0ODA4MjU0NDY0.DZ7PRw.yb8NX1Tha08nSHmzkWql07D_-5o"
+BOT_TOKEN = ""
 
 # Définnition du préfixe
 client = Bot('!')
@@ -75,8 +75,6 @@ async def love(ctx):
 async def castor(ctx):
     await client.send_message(ctx.message.channel, 'GallaR quand il voit des castors , il porte des lunettes pour bien les voir')
 
-
-
 @client.command(pass_context = True)
 async def kick(ctx, userName: discord.User):
     auteur = ctx.message.author.mention
@@ -85,11 +83,40 @@ async def kick(ctx, userName: discord.User):
     await client.send_message(ctx.message.channel, '{} à été expulsé par {}'.format(name, auteur))
 
 @client.command(pass_context = True)
-async def unban(ctx, userName: discord.User):
+async def ban(ctx, userName: discord.User):
     auteur = ctx.message.author.mention
     name = ctx.message.content[len('!unban'):].strip()
-    await client.unban(userName)
-    await client.send_message(ctx.message.channel, '{} à été débanni par {}'.format(name, auteur))
+    file = "/home/samuel/Images/Gif/banhammer.gif"
+    await client.ban(userName)
+    await client.send_file(ctx.message.channel, file, filename=None, content='{} à été banni par {}'.format(name, auteur), tts=False)
+
+@client.command(pass_context = True)
+async def torture(ctx, userName: discord.User):
+    auteur = ctx.message.author.mention
+    name = ctx.message.content[len('!torture'):].strip()
+    await client.change_nickname(userName, 'Torturé, meurtri')
+    tmp = await client.send_message(ctx.message.channel, '{} à été torturé par {}'.format(name, auteur))
+    await asyncio.sleep(5)
+    await client.change_nickname(userName, '')
+    await client.edit_message(tmp, '{} s\'est remit de ses blessures.'.format(name, auteur))
+
+@client.command(pass_context = True)
+async def embed(ctx):
+    em = discord.Embed(title='My Embed Title', description='My Embed Content.', colour=0xDEADBF)
+    em.set_author(name='Someone', icon_url=client.user.default_avatar_url)
+    await client.send_message(ctx.message.channel, embed=em)
+
+@client.command(pass_context = True)
+async def ageducapitaine(ctx):
+    em = discord.Embed(title='Quel est l\'âge du capitaine?', description='\
+Un navire est en mer, il est parti de Boston chargé de coton, il jauge 200 \
+tonneaux, il fait voile vers Le Havre, le grand mât est cassé, il y a un \
+mousse sur le gaillard avant, les passagers sont au nombre de douze, \
+le vent souffle N.-E.-E., l\'horloge marque trois heures un quart de l\'\
+après-midi, on est au mois de mai….\r**Quel est l\'âge du capitaine ?**',
+    colour=0xFF2800)
+    em.set_author(name='Herobrine', icon_url=client.user.avatar_url)
+    await client.send_message(ctx.message.channel, embed=em)
 
 # infos au démmarage
 @client.event
