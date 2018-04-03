@@ -11,7 +11,7 @@ from discord.ext.commands import Bot
 BOT_TOKEN = ""
 
 # Définnition du préfixe
-client = Bot('¿')
+client = Bot('!')
 
 
 # Définnition des commandes
