@@ -141,9 +141,8 @@ async def anniversaire(ctx, userName: discord.User):
 # infos au démmarage
 @client.event
 async def on_ready():
-    print('Connecté en tant que:')
-    print(client.user.name)
-    print(client.user.id)
+    print('Connecté en tant qu\'{}'.format(client.user.name))
+    print('ID du bot: {}'.format(client.user.id))
     print('En cours d\'exécution.')
 
 client.run(config['BOT_TOKEN'])
