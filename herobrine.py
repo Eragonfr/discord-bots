@@ -7,11 +7,24 @@ import discord
 import json
 from discord.ext.commands import Bot
 
-# Définnition des variables
-BOT_TOKEN = ""
+def load_config(bot):
+    ofi = open('config.json', 'r')
+    all_config_json = ofi.read()
+    ofi.close()
+    all_config = json.loads(all_config_json)
+    try:
+        bot_config = all_config[bot]
+    except KeyError:
+        print('Erreur la configuration n\'a pas pu être trouvée assurez vous d\'avoir bien un fichier config.json, \n et de l\'avoir correctement rempli')
+    except:
+        print('Oups! Une erreur inconnue est survenue lors du chargement de la configuration.')
+    return all_config[bot]
+
+## Définnition des variables
+config = load_config('beta')
 
 # Définnition du préfixe
-client = Bot('!')
+client = Bot(config['BOT_PREFIX'])
 
 
 # Définnition des commandes
@@ -133,4 +146,4 @@ async def on_ready():
     print(client.user.id)
     print('En cours d\'exécution.')
 
-client.run(BOT_TOKEN)
+client.run(config['BOT_TOKEN'])
