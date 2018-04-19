@@ -33,6 +33,7 @@ class FunyCommands(object):
                                       .format(counter))
 
         @client.command(pass_context=True)
+
         async def hug(ctx):
             auteur = ctx.message.author.mention
             name = ctx.message.content[len('!hug'):].strip()
@@ -60,6 +61,7 @@ un bisou de {} :heart:'.format(name, auteur))
             await client.send_message(ctx.message.channel, 'C\'est pas faux!')
 
         @client.command(pass_context=True)
+
         async def torture(ctx, userName: discord.User):
             auteur = ctx.message.author.mention
             name = ctx.message.content[len('!torture'):].strip()
