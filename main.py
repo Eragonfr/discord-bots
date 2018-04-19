@@ -1,13 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
+"""
+Code principal du bot, vérification des paramètres
+et chargement de la configuration
+"""
 import asyncio
 import discord
 import sys
 from bots.admin import AdminCommands
 from bots.functions import LoadFunctions
 
-# Code principal du bot, vérification des paramètres et chargement de la configuration
 if len(sys.argv) < 2:
     LoadFunctions.help_bot()
     sys.exit(1)
@@ -19,14 +21,14 @@ if len(sys.argv) > 3:
 if param1 == "dev":
     config = LoadFunctions.load_config(param1)
     LoadFunctions.run(param1, config)
-elif param1 == "prod":
+elif param1 == "beta":
     config = LoadFunctions.load_config(param1)
-    AdminCommands.commands(config)
     LoadFunctions.run(param1, config)
 elif param1 == "help":
     LoadFunctions.help_bot()
     sys.exit(1)
 else:
-    print('Erreur: la paramètre "{}" n\'est pas reconnu êtes vous sûr de l\'avoir correctement écrit et placé dans la commande?'.format(param1))
+    print('Erreur: la paramètre "{}" n\'est pas reconnu êtes vous sûr de l\'\
+           avoir correctement écrit et placé dans la commande?'.format(param1))
     LoadFunctions.help_bot()
     sys.exit(1)

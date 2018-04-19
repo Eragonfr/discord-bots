@@ -32,9 +32,12 @@ class LoadFunctions(object):
         try:
             bot_config = all_config[bot]
         except KeyError:
-            print('Erreur la configuration n\'a pas pu être trouvée assurez vous d\'avoir bien un fichier config.json, \n et de l\'avoir correctement rempli')
+            print('Erreur la configuration n\'a pas pu être trouvée assurez \
+                   vous d\'avoir bien un fichier config.json, \n et de l\'\
+                   avoir correctement rempli')
         except:
-            print('Oups! Une erreur inconnue est survenue lors du chargement de la configuration.')
+            print('Oups! Une erreur inconnue est survenue lors du chargement \
+                   de la configuration.')
         return bot_config
 
     def logs(bot):
@@ -45,12 +48,15 @@ class LoadFunctions(object):
             logger.setLevel(logging.DEBUG)
         else:
             logger.setLevel(logging.INFO)
-        handler = logging.FileHandler(filename='discord.dev.log', encoding='utf-8', mode='w')
-        handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
+        handler = logging.FileHandler(filename='discord.dev.log',
+                                      encoding='utf-8', mode='w')
+        handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:\
+                                                %(name)s: %(message)s'))
         logger.addHandler(handler)
 
     def run(param1, config):
         botclient = Bot(config['BOT_PREFIX'])
+
         @botclient.event
         async def on_ready():
             print('Connecté en tant qu\'{}'.format(botclient.user.name))
