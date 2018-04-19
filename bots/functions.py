@@ -10,7 +10,7 @@ import json
 from discord.ext.commands import Bot
 from bots.admin import AdminCommands
 from bots.fun import FunyCommands
-
+from bots.herobrine import HeroCommands
 
 class LoadFunctions(object):
     """"""
@@ -65,6 +65,7 @@ class LoadFunctions(object):
         print(config['BOT_VERSION'])
         AdminCommands.commands(config, botclient)
         FunyCommands.commands(config, botclient)
+        HeroCommands.commands(config, botclient)
         LoadFunctions.logs(param1)
         print('Connexion à Discord en cours...')
         botclient.run(config['BOT_TOKEN'])
