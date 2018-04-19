@@ -13,12 +13,12 @@ class FunyCommands(object):
     def commands(config, client):
         @client.command(pass_context=True)
         async def cats(ctx):
-            await client.send_file(channel,
+            await client.send_file(ctx.message.channel,
                                    'https://thecatapi.com/api/images/get')
 
         @client.command(pass_context=True)
         async def dogs(ctx):
-            await client.send_file(channel, 'https://random.dog/')
+            await client.send_file(ctx.message.channel, 'https://random.dog/')
 
         @client.command(pass_context=True)
         async def test(ctx):
@@ -33,14 +33,7 @@ class FunyCommands(object):
                                       .format(counter))
 
         @client.command(pass_context=True)
-        async def sleep(ctx):
-            tmp = await client.send_message(ctx.message.channel,
-                                            'Je vais me coucher pour faire \
-passer la nuit.')
-            await asyncio.sleep(5)
-            await client.edit_message(tmp, 'C\'est le matin!')
 
-        @client.command(pass_context=True)
         async def hug(ctx):
             auteur = ctx.message.author.mention
             name = ctx.message.content[len('!hug'):].strip()
@@ -68,17 +61,7 @@ un bisou de {} :heart:'.format(name, auteur))
             await client.send_message(ctx.message.channel, 'C\'est pas faux!')
 
         @client.command(pass_context=True)
-        async def love(ctx):
-            await client.send_message(ctx.message.channel, 'Je suis amoureux \
-d\'Ahoki')
 
-        @client.command(pass_context=True)
-        async def castor(ctx):
-            await client.send_message(ctx.message.channel,
-                                      'GallaR quand il voit des castors , il \
-porte des lunettes pour bien les voir')
-
-        @client.command(pass_context=True)
         async def torture(ctx, userName: discord.User):
             auteur = ctx.message.author.mention
             name = ctx.message.content[len('!torture'):].strip()

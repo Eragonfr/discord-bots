@@ -31,5 +31,5 @@ vous pouvez changer:
 Pour lancer le bot vous devez utiliser `python3 main.py dev` ou `./main.py dev`
 
 ### TODO:
-- Permettre le lancement du bot avec `main.py`.
 - Chargement dynamique des fichiers de commandes.
+- Créer un wiki.
