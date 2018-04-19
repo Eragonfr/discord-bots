@@ -2,16 +2,13 @@
 # -*- coding: utf-8 -*-
 
 import asyncio
-import discord
-from discord.ext.commands import Bot
 
 class AdminCommands(object):
     """"""
     def __init__(self, arg):
         self.arg = arg
 
-    def commands(config):
-        client = Bot(config['BOT_PREFIX'])
+    def commands(config, client):
         @client.command(pass_context = True)
         async def clear(ctx, number):
             mgs = [] #Empty list to put all the ctx.messages in the log
@@ -23,23 +20,23 @@ class AdminCommands(object):
             await client.delete_messages(mgs)
             await client.send_message(ctx.message.channel, '{} messages  ont été supprimées.'.format(msg_del))
 
-        @client.command(pass_context = True)
-        async def kick(ctx, userName: discord.User):
-            auteur = ctx.message.author.mention
-            name = ctx.message.content[len('!kick'):].strip()
-            await client.kick(userName)
-            await client.send_message(ctx.message.channel, '{} à été expulsé par {}'.format(name, auteur))
+        # @client.command(pass_context = True)
+        # async def kick(ctx, userName: discord.User):
+        #     auteur = ctx.message.author.mention
+        #     name = ctx.message.content[len('!kick'):].strip()
+        #     await client.kick(userName)
+        #     await client.send_message(ctx.message.channel, '{} à été expulsé par {}'.format(name, auteur))
 
-        @client.command(pass_context = True)
-        async def ban(ctx, userName: discord.User):
-            auteur = ctx.message.author.mention
-            name = ctx.message.content[len('!ban'):].strip()
-            await client.ban(userName)
-            await client.send_message(ctx.message.channel, '{} à été banni par {}'.format(name, auteur))
-
-        @client.command(pass_context = True)
-        async def unban(ctx, userName: discord.User):
-            auteur = ctx.message.author.mention
-            name = ctx.message.content[len('!unban'):].strip()
-            await client.unban(userName)
-            await client.send_message(ctx.message.channel, '{} à été débanni par {}'.format(name, auteur))
+        # @client.command(pass_context = True)
+        # async def ban(ctx, userName: discord.User):
+        #     auteur = ctx.message.author.mention
+        #     name = ctx.message.content[len('!ban'):].strip()
+        #     await client.ban(userName)
+        #     await client.send_message(ctx.message.channel, '{} à été banni par {}'.format(name, auteur))
+        #
+        # @client.command(pass_context = True)
+        # async def unban(ctx, userName: discord.User):
+        #     auteur = ctx.message.author.mention
+        #     name = ctx.message.content[len('!unban'):].strip()
+        #     await client.unban(userName)
+        #     await client.send_message(ctx.message.channel, '{} à été débanni par {}'.format(name, auteur))

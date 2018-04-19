@@ -9,6 +9,8 @@ import sys
 import json
 from discord.ext.commands import Bot
 from bots.admin import AdminCommands
+from bots.fun import FunyCommands
+
 
 class LoadFunctions(object):
     """"""
@@ -48,15 +50,15 @@ class LoadFunctions(object):
         logger.addHandler(handler)
 
     def run(param1, config):
-        botclient = discord.Client()
+        botclient = Bot(config['BOT_PREFIX'])
         @botclient.event
         async def on_ready():
             print('Connecté en tant qu\'{}'.format(botclient.user.name))
             print('ID:{}'.format(botclient.user.id))
             print('En cours d\'éxecution.')
         print(config['BOT_VERSION'])
+        AdminCommands.commands(config, botclient)
+        FunyCommands.commands(config, botclient)
         LoadFunctions.logs(param1)
-        AdminCommands.commands(config)
         print('Connexion à Discord en cours...')
-        client = Bot(config['BOT_PREFIX'])
         botclient.run(config['BOT_TOKEN'])
