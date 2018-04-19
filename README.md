@@ -17,7 +17,7 @@ La configuration du Bot est contenue dans un fichier `config.json` qui doit cont
 ```json
 "beta":{
     "BOT_VERSION": "beta",
-    "BOT_NAME": "Herobrine",
+    "BOT_NAME": "Le nom du bot",
     "BOT_TOKEN": "LeTokenDeVotreBot",
     "BOT_PREFIX": "!",
     "BOT_COMMANDS": {"config": "True", "fun": "True"}
@@ -28,8 +28,7 @@ vous pouvez changer:
 - Le nom du bot en changeant la valeur de `BOT_NAME`.
 - Les fichiers de commandes à charger en changeant les valeurs de `BOT_COMMANDS`
 
-Pour lancer le bot actuellement vous êtes obligées d'utiliser `python3 herobrine.py` ou `./herobrine.py`.
-Dans un futur proche vous devrez utiliser `python3 main.py dev` ou `./main.py dev`
+Pour lancer le bot vous devez utiliser `python3 main.py dev` ou `./main.py dev`
 
 ### TODO:
 - Permettre le lancement du bot avec `main.py`.
