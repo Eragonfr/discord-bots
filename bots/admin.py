@@ -19,9 +19,11 @@ class AdminCommands(object):
                 mgs.append(x)
                 msg_del += 1
             await client.delete_messages(mgs)
-            await client.send_message(ctx.message.channel,
-                                      '{} messages  ont été supprimées.'.
-                                      format(msg_del))
+            em = discord.Embed(title='', description='{} messages  ont été \
+supprimées.'.format(msg_del), colour=0x005D0A)
+            em.set_author(name=client.user.name, icon_url=client.user.\
+                          avatar_url)
+            await client.send_message(ctx.message.channel, embed=em)
 
         # @client.command(pass_context = True)
         # async def kick(ctx, userName: discord.User):

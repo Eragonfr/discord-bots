@@ -17,12 +17,15 @@ class LoadFunctions(object):
     def __init__(self, arg):
         self.arg = arg
 
-    def help_bot():
-        print("Utilisation: \n  main.py [dev|prod] [options]\n")
-        print("Options:\n\t\t+TODO+")
-        print("--------------------------------------------\n")
-        print(" -h, --help   \t\tafficher cette aide")
-        print(" -V, --version\t\tafficher la version\n")
+    def help_bot(args):
+        print("""
+Utilisation : \n  main.py [dev|prod] [options]\n\n
+Les arguments 'dev' et 'prod' sont obligatoires, certaines commandes n'en
+ont pas besoin.\n
+ -h, --help   \t\tafficher cette aide\n
+ -V, --version\t\tafficher la version(pas implémenté)\n
+ Signalez toute anomalie à sam.vzh@netc.fr
+""")
 
     def load_config(bot):
         ofi = open('config.json', 'r')
