@@ -1,19 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import asyncio
-import discord
 import logging
-import importlib
-import sys
 import json
 from discord.ext.commands import Bot
+
 from bots.admin import AdminCommands
 from bots.fun import FunyCommands
 from bots.herobrine import HeroCommands
 
+
 class LoadFunctions(object):
     """"""
+
     def __init__(self, arg):
         self.arg = arg
 
@@ -28,19 +27,16 @@ ont pas besoin.\n
 """)
 
     def load_config(bot):
-        ofi = open('config.json', 'r')
-        all_config_json = ofi.read()
-        ofi.close()
-        all_config = json.loads(all_config_json)
         try:
+            ofi = open('config.json', 'r')
+            all_config_json = ofi.read()
+            ofi.close()
+            all_config = json.loads(all_config_json)
             bot_config = all_config[bot]
         except KeyError:
             print('Erreur la configuration n\'a pas pu être trouvée assurez \
                    vous d\'avoir bien un fichier config.json, \n et de l\'\
                    avoir correctement rempli')
-        except:
-            print('Oups! Une erreur inconnue est survenue lors du chargement \
-                   de la configuration.')
         return bot_config
 
     def logs(bot):
@@ -49,15 +45,17 @@ ont pas besoin.\n
         logger = logging.getLogger('discord')
         if bot == 'dev':
             logger.setLevel(logging.DEBUG)
+            file = 'discord.dev.log'
         else:
-            logger.setLevel(logging.INFO)
-        handler = logging.FileHandler(filename='discord.dev.log',
+            logger.setLevel(logging.DEBUG)
+            file = 'discord.log'
+        handler = logging.FileHandler(filename=file,
                                       encoding='utf-8', mode='w')
         handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:\
                                                 %(name)s: %(message)s'))
         logger.addHandler(handler)
 
-    def run(param1, config):
+    def run(config):
         botclient = Bot(config['BOT_PREFIX'])
 
         @botclient.event
@@ -69,6 +67,6 @@ ont pas besoin.\n
         AdminCommands.commands(config, botclient)
         FunyCommands.commands(config, botclient)
         HeroCommands.commands(config, botclient)
-        LoadFunctions.logs(param1)
+        LoadFunctions.logs(config['BOT_VERSION'])
         print('Connexion à Discord en cours...')
         botclient.run(config['BOT_TOKEN'])

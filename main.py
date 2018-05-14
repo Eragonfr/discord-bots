@@ -4,10 +4,9 @@
 Code principal du bot, vérification des paramètres
 et chargement de la configuration
 """
-import asyncio
-import discord
+# import asyncio
+# import discord
 import sys
-from bots.admin import AdminCommands
 from bots.functions import LoadFunctions
 
 if len(sys.argv) < 2:
@@ -22,10 +21,10 @@ if len(sys.argv) > 3:
 
 if param1 == "dev":
     config = LoadFunctions.load_config(param1)
-    LoadFunctions.run(param1, config)
+    LoadFunctions.run(config)
 elif param1 == "beta":
     config = LoadFunctions.load_config(param1)
-    LoadFunctions.run(param1, config)
+    LoadFunctions.run(config)
 elif param1 == "help" or param1 == "-h" or param1 == "--help" or\
      param2 == "help" or param2 == "-h" or param2 == "--help":
     LoadFunctions.help_bot(sys.argv)
