@@ -7,80 +7,86 @@ import discord
 
 class FunyCommands(object):
     """docstring for FunyCommands."""
+
     def __init__(self, arg):
         self.arg = arg
 
     def commands(config, client):
+
         @client.command(pass_context=True)
         async def cats(ctx):
-            await client.send_file(ctx.message.channel,
-                                   'https://thecatapi.com/api/images/get')
+            em = discord.Embed(title='Voilà un chat.', colour=0x005D0A)
+            em.set_image(url='https://thecatapi.com/api/images/get')
+            em.set_author(name=client.user.name, icon_url=client.user.
+                          avatar_url)
+            await client.send_message(ctx.message.channel, embed=em)
 
         @client.command(pass_context=True)
         async def dogs(ctx):
-            await client.send_file(ctx.message.channel, 'https://random.dog/')
+            em = discord.Embed(title='Voilà un chien.', colour=0x005D0A)
+            em.set_image(url='https://random.dog/')
+            em.set_author(name=client.user.name, icon_url=client.user.
+                          avatar_url)
+            await client.send_message(ctx.message.channel, embed=em)
 
         @client.command(pass_context=True)
         async def test(ctx):
+            em = discord.Embed(title='', description='Calcul des messages...',
+                               colour=0x005D0A)
+            em.set_author(name=client.user.name, icon_url=client.user.
+                          avatar_url)
             counter = 0
             tmp = await client.send_message(ctx.message.channel,
-                                            'Calcul des messages...')
+                                            embed=em)
             async for log in client.logs_from(ctx.message.channel, limit=100):
                 if log.author == ctx.message.author:
                     counter += 1
 
-            await client.edit_message(tmp, 'Vous avez écrit {} messages.'
-                                      .format(counter))
+            em = discord.Embed(title='', description='Vous avez écrit {} \
+messages.'.format(counter), colour=0x005D0A)
+            await client.edit_message(tmp, embed=em)
 
         @client.command(pass_context=True)
-
         async def hug(ctx):
             auteur = ctx.message.author.mention
             name = ctx.message.content[len('!hug'):].strip()
-            await client.send_message(ctx.message.channel,
-                                      ':hugging: {} reçois un câlin de {} \
-:heart:'.format(name, auteur))
+            em = discord.Embed(title='', description=':hugging: {} reçois un \
+câlin de {} :heart:'.format(name, auteur), colour=0x005D0A)
+            em.set_author(name=client.user.name, icon_url=client.user.
+                          avatar_url)
+            await client.send_message(ctx.message.channel, embed=em)
 
         @client.command(pass_context=True)
         async def kiss(ctx):
             auteur = ctx.message.author.mention
             name = ctx.message.content[len('!kiss'):].strip()
-            await client.send_message(ctx.message.channel, ':heart: {} reçois \
-un bisou de {} :heart:'.format(name, auteur))
-
-        @client.command(pass_context=True)
-        async def f(ctx):
-            await client.send_message(ctx.message.channel, '**FAUX!**')
-
-        @client.command(pass_context=True)
-        async def v(ctx):
-            await client.send_message(ctx.message.channel, '**Vrai!**')
+            em = discord.Embed(title='', description=':heart: {} reçois \
+un bisou de {} :heart:'.format(name, auteur), colour=0x005D0A)
+            em.set_author(name=client.user.name, icon_url=client.user.
+                          avatar_url)
+            await client.send_message(ctx.message.channel, embed=em)
 
         @client.command(pass_context=True)
         async def cpf(ctx):
             await client.send_message(ctx.message.channel, 'C\'est pas faux!')
 
         @client.command(pass_context=True)
-
         async def torture(ctx, userName: discord.User):
             auteur = ctx.message.author.mention
             name = ctx.message.content[len('!torture'):].strip()
             await client.change_nickname(userName, 'Torturé, meurtri')
-            tmp = await client.send_message(ctx.message.channel, '{} à été \
-torturé par {}'.format(name, auteur))
+            em = discord.Embed(title='Torture', description='{} à été \
+torturé par {}'.format(name, auteur), colour=0x005D0A)
+            em.set_author(name=client.user.name, icon_url=client.user.
+                          avatar_url)
+            tmp = await client.send_message(ctx.message.channel, embed=em)
             await asyncio.sleep(5)
             await client.change_nickname(userName, '')
-            await client.edit_message(tmp, '{} s\'est remit de ses blessures.'
-                                      .format(name, auteur))
-
-        @client.command(pass_context=True)
-        async def embed(ctx):
-            em = discord.Embed(title='My Embed Title',
-                               description='My Embed Content.',
-                               colour=0xDEADBF)
-            em.set_author(name='Someone',
-                          icon_url=client.user.default_avatar_url)
-            await client.send_message(ctx.message.channel, embed=em)
+            em = discord.Embed(title='Fin de la torture.', description='{} s\'\
+est remit de ses blessures.'.format(name), colour=0x005D0A)
+            em.set_author(name=client.user.name, icon_url=client.user.
+                          avatar_url)
+            await client.edit_message(tmp, embed=em)
 
         @client.command(pass_context=True)
         async def ageducapitaine(ctx):
@@ -91,7 +97,8 @@ Havre, le grand mât est cassé, il y a un mousse sur le gaillard avant, les \
 passagers sont au nombre de douze, le vent souffle N.-E.-E., l\'horloge \
 marque trois heures un quart de l\'après-midi, on est au mois de mai….\
 \r**Quel est l\'âge du capitaine ?**', colour=0xFF2800)
-            em.set_author(name='Herobrine', icon_url=client.user.avatar_url)
+            em.set_author(name=client.user.name,
+                          icon_url=client.user.avatar_url)
             await client.send_message(ctx.message.channel, embed=em)
 
         @client.command(pass_context=True)
@@ -100,5 +107,17 @@ marque trois heures un quart de l\'après-midi, on est au mois de mai….\
 anniversaire {}!'.format(userName.mention), colour=0x005D0A)
             em.set_image(url='https://orig00.deviantart.net/2336/f/2018/087/a/\
 6/a6ee731989e9972328f62f7663f54b33-dc78dpp.png')
-            em.set_author(name='Herobrine', icon_url=client.user.avatar_url)
+            em.set_author(name=client.user.name,
+                          icon_url=client.user.avatar_url)
             await client.send_message(ctx.message.channel, embed=em)
+
+        @client.command(pass_context=True)
+        async def say(ctx):
+            content = ctx.message.content.replace("!say ", "")
+            await client.send_message(ctx.message.channel,
+                                      '{}'.format(content))
+            await client.delete_message(ctx.message)
+
+        # @client.event
+        # async def mentionne():
+        #     await client.send_message(ctx.message.channel, "Oui?")
