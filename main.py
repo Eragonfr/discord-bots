@@ -1,11 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Code principal du bot, vérification des paramètres
-et chargement de la configuration
+Code principal du bot, chargement de la configuration
 """
-# import asyncio
-# import discord
 import sys
 from bots.functions import LoadFunctions
 
@@ -19,10 +16,7 @@ if len(sys.argv) > 3:
     if len(sys.argv) > 4:
         param3 = sys.argv[3]
 
-if param1 == "dev":
-    config = LoadFunctions.load_config(param1)
-    LoadFunctions.run(config)
-elif param1 == "beta":
+if param1:
     config = LoadFunctions.load_config(param1)
     LoadFunctions.run(config)
 elif param1 == "help" or param1 == "-h" or param1 == "--help" or\

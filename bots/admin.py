@@ -6,14 +6,13 @@ import discord
 
 
 class AdminCommands(object):
-    """"""
-
     def __init__(self, arg):
         self.arg = arg
 
     def commands(config, client):
         @client.command(pass_context=True)
         async def clear(ctx, number):
+            """Clear all of the selected messages. Ex: !clear 10 clear the last 10 messages"""
             mgs = []
             number = int(number)
             msg_del = 0

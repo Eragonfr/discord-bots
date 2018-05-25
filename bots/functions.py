@@ -1,8 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""
+Fichier des fonctions principales du bot, chargement dynamique des fichiers
+et autres fonctions pratiques du bot.
+"""
+
 import logging
 import json
+import sys
+import discord
 from discord.ext.commands import Bot
 
 from bots.admin import AdminCommands
@@ -33,10 +40,15 @@ ont pas besoin.\n
             ofi.close()
             all_config = json.loads(all_config_json)
             bot_config = all_config[bot]
+        except FileNotFoundError:
+            print('Erreur le fichier de configuration n\'a pas pu être \
+localisé. Assurez vous d\'en avoir un et d\'avoir les droits de lecture et \
+d\'écriture dessus')
+            sys.exit(1)
         except KeyError:
-            print('Erreur la configuration n\'a pas pu être trouvée assurez \
-                   vous d\'avoir bien un fichier config.json, \n et de l\'\
-                   avoir correctement rempli')
+            print('Erreur la configuration demandé n\'a pas pu être trouvée \
+assurez vous d\'avoir correctement rempli le fichier config.json')
+            sys.exit(1)
         return bot_config
 
     def logs(bot):
@@ -56,17 +68,18 @@ ont pas besoin.\n
         logger.addHandler(handler)
 
     def run(config):
-        botclient = Bot(config['BOT_PREFIX'])
+        botclient = Bot(config['prefix'])
 
         @botclient.event
         async def on_ready():
             print('Connecté en tant qu\'{}'.format(botclient.user.name))
             print('ID:{}'.format(botclient.user.id))
             print('En cours d\'éxecution.')
-        print(config['BOT_VERSION'])
+        print('Discord Bot({}) using discord.py {}'.format(
+              config['version'], discord.__version__))
         AdminCommands.commands(config, botclient)
         FunyCommands.commands(config, botclient)
         HeroCommands.commands(config, botclient)
-        LoadFunctions.logs(config['BOT_VERSION'])
+        LoadFunctions.logs(config['version'])
         print('Connexion à Discord en cours...')
-        botclient.run(config['BOT_TOKEN'])
+        botclient.run(config['token'])
