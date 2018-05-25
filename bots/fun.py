@@ -12,7 +12,6 @@ class FunyCommands(object):
         self.arg = arg
 
     def commands(config, client):
-
         @client.command(pass_context=True)
         async def cats(ctx):
             em = discord.Embed(title='Voilà un chat.', colour=0x005D0A)
@@ -113,11 +112,12 @@ anniversaire {}!'.format(userName.mention), colour=0x005D0A)
 
         @client.command(pass_context=True)
         async def say(ctx):
-            content = ctx.message.content.replace("!say ", "")
-            await client.send_message(ctx.message.channel,
-                                      '{}'.format(content))
-            await client.delete_message(ctx.message)
-
-        # @client.event
-        # async def mentionne():
-        #     await client.send_message(ctx.message.channel, "Oui?")
+            for i in ctx.message.author.roles:
+                if i.name == config['staff_role']:
+                    await client.delete_message(ctx.message)
+                    content = ctx.message.content.replace("!say ", "")
+                    await client.send_message(ctx.message.channel,
+                                              '{}'.format(content))
+                else:
+                    print('{} à essayé de faire un say'.format(ctx.message.
+                                                               author.name))

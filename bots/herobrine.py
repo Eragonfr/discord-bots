@@ -6,10 +6,7 @@ import discord
 
 
 class HeroCommands(object):
-    """docstring for HeroCommands."""
-
-    def __init__(self, arg):
-        self.arg = arg
+    """Commandes personalisées pour Hérobrine."""
 
     def commands(config, client):
         @client.command(pass_context=True)
