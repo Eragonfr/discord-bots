@@ -55,6 +55,15 @@ par {}'.format(userName.mention, ctx.message.author.mention))
 par {}'.format(userName.mention, ctx.message.author.mention))
 
         @client.command(pass_context=True)
+        @commands.has_role(config['staff_role'])
+        async def softban(ctx, userName: discord.User):
+            """[Admin command] A simple softban command."""
+            await client.ban(userName, delete_message_days=6)
+            await client.unban(userName)
+            await client.send_message(ctx.message.channel, '{} à été débanni\
+par {}'.format(userName.mention, ctx.message.author.mention))
+
+        @client.command(pass_context=True)
         async def torture(ctx, userName: discord.User):
             """[Misc command] A simple destroy command."""
             auteur = ctx.message.author.mention
