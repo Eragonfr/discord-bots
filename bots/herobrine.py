@@ -37,3 +37,13 @@ voit des castors , il porte des lunettes pour bien les voirs.',
                           avatar_url)
             await client.send_message(ctx.message.channel, embed=em)
             await client.delete_message(ctx.message)
+
+        @client.command(pass_context=True)
+        async def anniversaire(ctx, userName: discord.User):
+            em = discord.Embed(title='Bon anniversaire!', description='Joyeux \
+anniversaire {}!'.format(userName.mention), colour=0x005D0A)
+            em.set_image(url='https://orig00.deviantart.net/2336/f/2018/087/a/\
+6/a6ee731989e9972328f62f7663f54b33-dc78dpp.png')
+            em.set_author(name=client.user.name,
+                          icon_url=client.user.avatar_url)
+            await client.send_message(ctx.message.channel, embed=em)

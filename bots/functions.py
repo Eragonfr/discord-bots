@@ -78,7 +78,7 @@ assurez vous d\'avoir correctement rempli le fichier config.json')
         print('Discord Bot({}) using discord.py {}'.format(
               config['version'], discord.__version__))
         AdminCommands.commands(config, botclient)
-        FunyCommands.commands(config, botclient)
+        FunyCommands.misccommands(config, botclient)
         HeroCommands.commands(config, botclient)
         LoadFunctions.logs(config['version'])
         print('Connexion à Discord en cours...')
