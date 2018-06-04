@@ -1,2 +1,2 @@
 discord.py[voice]==0.16.12
-simplejson
+simplejson==3.15.0
