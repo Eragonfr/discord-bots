@@ -1,2 +1,2 @@
 discord.py[voice]
-simplejson
+simplejson==3.15.0
