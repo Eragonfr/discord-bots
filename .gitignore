@@ -6,6 +6,7 @@
 
 # Ignorer le fichier contenant le token est les variables
 config.json
+config.ini
 
 # Ignorer le venv
 .venv/
