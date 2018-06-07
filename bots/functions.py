@@ -7,14 +7,11 @@ et autres fonctions pratiques du bot.
 """
 
 import logging
-import json
 import sys
 import discord
+import configparser
+import importlib
 from discord.ext.commands import Bot
-
-from bots.admin import AdminCommands
-from bots.fun import FunyCommands
-from bots.herobrine import HeroCommands
 
 
 class LoadFunctions(object):
@@ -35,10 +32,8 @@ ont pas besoin.\n
 
     def load_config(bot):
         try:
-            ofi = open('config.json', 'r')
-            all_config_json = ofi.read()
-            ofi.close()
-            all_config = json.loads(all_config_json)
+            all_config = configparser.ConfigParser()
+            all_config.read('config.ini')
             bot_config = all_config[bot]
         except FileNotFoundError:
             print('Erreur le fichier de configuration n\'a pas pu être \
@@ -47,7 +42,7 @@ d\'écriture dessus')
             sys.exit(1)
         except KeyError:
             print('Erreur la configuration demandé n\'a pas pu être trouvée \
-assurez vous d\'avoir correctement rempli le fichier config.json')
+assurez vous d\'avoir correctement rempli le fichier config.ini')
             sys.exit(1)
         return bot_config
 
@@ -77,9 +72,11 @@ assurez vous d\'avoir correctement rempli le fichier config.json')
             print('En cours d\'éxecution.')
         print('Discord Bot({}) using discord.py {}'.format(
               config['version'], discord.__version__))
-        AdminCommands.commands(config, botclient)
-        FunyCommands.commands(config, botclient)
-        HeroCommands.commands(config, botclient)
+        for i, e in eval(config['commands']).items():
+            importlib.import_module(e, i)
+            eval(i).commands(config, botclient)
+            # FunyCommands.commands(config, botclient)
+            # HeroCommands.commands(config, botclient)
         LoadFunctions.logs(config['version'])
         print('Connexion à Discord en cours...')
         botclient.run(config['token'])
