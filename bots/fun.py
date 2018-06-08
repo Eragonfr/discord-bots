@@ -5,7 +5,7 @@ import discord
 from discord.ext import commands
 
 
-class FunyCommands(object):
+class Commands(object):
     """docstring for FunyCommands."""
 
     def __init__(self, arg):
@@ -13,18 +13,18 @@ class FunyCommands(object):
 
     def commands(config, client):
         @client.command(pass_context=True)
-        async def cats(ctx):
+        async def cat(ctx):
             """[Misc command] A simple cat command."""
-            em = discord.Embed(title='Voilà un chat.', colour=0x005D0A)
+            em = discord.Embed(title='Here\'s a cat.', colour=0x005D0A)
             em.set_image(url='https://thecatapi.com/api/images/get')
             em.set_author(name=client.user.name, icon_url=client.user.
                           avatar_url)
             await client.send_message(ctx.message.channel, embed=em)
 
         @client.command(pass_context=True)
-        async def dogs(ctx):
+        async def dog(ctx):
             """[Misc command] A simple dogs command."""
-            em = discord.Embed(title='Voilà un chien.', colour=0x005D0A)
+            em = discord.Embed(title='Here\'s a dog.', colour=0x005D0A)
             em.set_image(url='https://random.dog/')
             em.set_author(name=client.user.name, icon_url=client.user.
                           avatar_url)
@@ -33,7 +33,7 @@ class FunyCommands(object):
         @client.command(pass_context=True)
         async def test(ctx):
             """[Misc command] A simple test command."""
-            em = discord.Embed(title='', description='Calcul des messages...',
+            em = discord.Embed(title='', description='Counting the messages...',
                                colour=0x005D0A)
             em.set_author(name=client.user.name, icon_url=client.user.
                           avatar_url)
@@ -44,8 +44,8 @@ class FunyCommands(object):
                 if log.author == ctx.message.author:
                     counter += 1
 
-            em = discord.Embed(title='', description='Vous avez écrit {} \
-messages.'.format(counter), colour=0x005D0A)
+            em = discord.Embed(title='', description='You wrote {} messages.'
+                               .format(counter), colour=0x005D0A)
             await client.edit_message(tmp, embed=em)
 
         @client.command(pass_context=True)
@@ -53,8 +53,8 @@ messages.'.format(counter), colour=0x005D0A)
             """[Misc command] A simple hugging command."""
             auteur = ctx.message.author.mention
             name = ctx.message.content[len('!hug'):].strip()
-            em = discord.Embed(title='', description=':hugging: {} reçois un \
-câlin de {} :heart:'.format(name, auteur), colour=0x005D0A)
+            em = discord.Embed(title='', description=':hugging: {} receive a \
+hug from {} :heart:'.format(name, auteur), colour=0x005D0A)
             em.set_author(name=client.user.name, icon_url=client.user.
                           avatar_url)
             await client.send_message(ctx.message.channel, embed=em)
@@ -64,30 +64,16 @@ câlin de {} :heart:'.format(name, auteur), colour=0x005D0A)
             """[Misc command] A simple kissing command."""
             auteur = ctx.message.author.mention
             name = ctx.message.content[len('!kiss'):].strip()
-            em = discord.Embed(title='', description=':heart: {} reçois \
-un bisou de {} :heart:'.format(name, auteur), colour=0x005D0A)
+            em = discord.Embed(title='', description=':heart: {} receive a \
+kiss from {} :heart:'.format(name, auteur), colour=0x005D0A)
             em.set_author(name=client.user.name, icon_url=client.user.
                           avatar_url)
             await client.send_message(ctx.message.channel, embed=em)
 
         @client.command(pass_context=True)
-        async def cpf(ctx):
+        async def tbh(ctx):
             """[Misc command] A simple cpf command."""
-            await client.send_message(ctx.message.channel, 'C\'est pas faux!')
-
-        @client.command(pass_context=True)
-        async def ageducapitaine(ctx):
-            """[Misc command] A simple MDR command."""
-            em = discord.Embed(title='Quel est l\'âge du capitaine?',
-                               description='Un navire est en mer, il est \
-parti de Boston chargé de coton, il jauge 200 tonneaux, il fait voile vers Le \
-Havre, le grand mât est cassé, il y a un mousse sur le gaillard avant, les \
-passagers sont au nombre de douze, le vent souffle N.-E.-E., l\'horloge \
-marque trois heures un quart de l\'après-midi, on est au mois de mai….\
-\r**Quel est l\'âge du capitaine ?**', colour=0xFF2800)
-            em.set_author(name=client.user.name,
-                          icon_url=client.user.avatar_url)
-            await client.send_message(ctx.message.channel, embed=em)
+            await client.send_message(ctx.message.channel, 'To be honest')
 
         @client.command(pass_context=True)
         @commands.has_role(config['staff_role'])

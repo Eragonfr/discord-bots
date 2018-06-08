@@ -6,7 +6,7 @@ import asyncio
 from discord.ext import commands
 
 
-class AdminCommands(object):
+class Commands(object):
     def __init__(self, arg):
         self.arg = arg
 
@@ -14,8 +14,7 @@ class AdminCommands(object):
         @client.command(pass_context=True)
         async def clear(ctx, number):
             """
-            Clear all of the selected messages. Ex: !clear 10 clear the last
-            10 messages
+            Clear all of the selected messages.
             """
             mgs = []
             number = int(number)
