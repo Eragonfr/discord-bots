@@ -6,7 +6,7 @@ import asyncio
 from discord.ext import commands
 
 
-class AdminCommands(object):
+class Commands(object):
     def __init__(self, arg):
         self.arg = arg
 

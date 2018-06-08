@@ -5,13 +5,13 @@ import discord
 from discord.ext import commands
 
 
-class FunyCommands(object):
+class Commands(object):
     """docstring for FunyCommands."""
 
     def __init__(self, arg):
         self.arg = arg
 
-    def misccommands(config, client):
+    def commands(config, client):
         @client.command(pass_context=True)
         async def cats(ctx):
             """[Misc command] A simple cat command."""
