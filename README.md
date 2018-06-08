@@ -30,5 +30,5 @@ vous pouvez changer:
 Pour lancer le bot vous devez utiliser `python3 main.py dev` ou `./main.py dev`
 
 ### TODO:
-- Utilisation d'une base de données SQLight.
+- Utilisation d'une base de données SQLite.
 - Créer un wiki.
