@@ -72,11 +72,9 @@ assurez vous d\'avoir correctement rempli le fichier config.ini')
             print('En cours d\'éxecution.')
         print('Discord Bot({}) using discord.py {}'.format(
               config['version'], discord.__version__))
-        for i, e in eval(config['commands']).items():
-            importlib.import_module(e, i)
-            eval(i).commands(config, botclient)
-            # FunyCommands.commands(config, botclient)
-            # HeroCommands.commands(config, botclient)
+        for i in eval(config['commands']):
+            module = importlib.import_module(i)
+            module.Commands.commands(config, botclient)
         LoadFunctions.logs(config['version'])
         print('Connexion à Discord en cours...')
         botclient.run(config['token'])

@@ -5,7 +5,7 @@ import discord
 from discord.ext import commands
 
 
-class FunyCommands(object):
+class Commands(object):
     """docstring for FunyCommands."""
 
     def __init__(self, arg):
