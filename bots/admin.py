@@ -12,6 +12,7 @@ class Commands(object):
 
     def commands(config, client):
         @client.command(pass_context=True)
+        @commands.has_role(config['staff_role'])
         async def clear(ctx, number):
             """
             Clear all of the selected messages.
