@@ -1,4 +1,3 @@
 #!/usr/bin/sh
 
-source .venv/bin/activate
-./main.py beta
+pipenv run python main.py beta
